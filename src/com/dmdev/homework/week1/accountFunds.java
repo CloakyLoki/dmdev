@@ -22,7 +22,7 @@ public class accountFunds {
         double percent_for_broker = 10;
         double percent_on_shares = 2;
 
-        for (int i = 1; i < years * MONTHS_IN_YEAR + months; i++) {
+        for (int i = 1; i <= years * MONTHS_IN_YEAR + months; i++) {
             if (i % 6 == 0) {
                 salary += 400;
             }
