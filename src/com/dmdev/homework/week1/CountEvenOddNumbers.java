@@ -16,13 +16,13 @@ public class CountEvenOddNumbers {
 
     public static int countEvenNumbers(int value) {
         int evenNumbers = 0;
-        int value_length = 0;
-        int temp_counter = 1;
-        while (temp_counter <= value) { //определение количества разрядов числа
-            value_length++;
-            temp_counter *= 10;
+        int valueLength = 0;
+        int tempCounter = 1;
+        while (tempCounter <= value) { //определение количества разрядов числа
+            valueLength++;
+            tempCounter *= 10;
         }
-        for (int i = 0; i < value_length; i++) {
+        for (int i = 0; i < valueLength; i++) {
             if (((value % 10) % 2) == 0)
                 evenNumbers++;
             value /= 10;
@@ -32,13 +32,13 @@ public class CountEvenOddNumbers {
 
     public static int countOddNumbers(int value) {
         int oddNumbers = 0;
-        int value_length = 0;
-        int temp_counter = 1;
-        while (temp_counter <= value) { //определение количества разрядов числа
-            value_length++;
-            temp_counter *= 10;
+        int valueLength = 0;
+        int tempCounter = 1;
+        while (tempCounter <= value) { //определение количества разрядов числа
+            valueLength++;
+            tempCounter *= 10;
         }
-        for (int i = 0; i < value_length; i++) {
+        for (int i = 0; i < valueLength; i++) {
             if (((value % 10) % 2) != 0) //скобки добавлены для лучшей читаемости
                 oddNumbers++;
             value /= 10;

@@ -10,26 +10,26 @@ package com.dmdev.homework.week1;
 
 Для интереса: попробовать увеличить процент, которые Ваня инвестирует из своей зарплаты
  */
-public class accountFunds {
-    final static int MONTHS_IN_YEAR = 12;
+public class AccountFunds {
+    final static private int MONTHS_IN_YEAR = 12;
 
     public static void main(String[] args) {
         int years = 3;
         int months = 2;
         int salary = 600;
-        double account_vanya = 0;
-        double account_broker = 0;
-        double percent_for_broker = 10;
-        double percent_on_shares = 2;
+        double accountVanya = 0;
+        double accountBroker = 0;
+        double percentForBroker = 10;
+        double percentOnShares = 2;
 
         for (int i = 1; i <= years * MONTHS_IN_YEAR + months; i++) {
             if (i % 6 == 0) {
                 salary += 400;
             }
-            account_broker += (account_broker + (salary * (percent_for_broker / 100))) * (percent_on_shares / 100); //скобки добавлены для лучшей читаемости
-            account_vanya += (salary - 300) - (salary * (percent_for_broker / 100));
+            accountBroker += (accountBroker + (salary * (percentForBroker / 100))) * (percentOnShares / 100); //скобки добавлены для лучшей читаемости
+            accountVanya += (salary - 300) - (salary * (percentForBroker / 100));
         }
-        System.out.println("Собственный счет: $" + account_vanya);
-        System.out.println("Счет брокера: $" + account_broker);
+        System.out.println("Собственный счет: $" + accountVanya);
+        System.out.println("Счет брокера: $" + accountBroker);
     }
 }

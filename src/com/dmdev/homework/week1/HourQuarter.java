@@ -9,9 +9,9 @@ package com.dmdev.homework.week1;
 Протестировать функцию в main.
  */
 
-public class HourQuorter {
+public class HourQuarter {
 
-    final static short MINUTES_IN_HOUR = 60;
+    final static private short MINUTES_IN_HOUR = 60;
 
     public static void main(String[] args) {
         byte minutes = 42;

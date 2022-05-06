@@ -16,16 +16,16 @@ public class ReversedNumber {
     private static int reverseValue(int value) {
         int reversedValue = 0;
 
-        int value_length = 0;
-        int temp_counter = 1;
+        int valueLength = 0;
+        int tempCounter = 1;
 
-        while (temp_counter <= value) {
-            value_length++;
-            temp_counter *= 10;
+        while (tempCounter <= value) {
+            valueLength++;
+            tempCounter *= 10;
         }
 
-        for (int i = 0; i < value_length; i++) {
-            reversedValue += (value % 10) * Math.pow(10, value_length - i - 1);
+        for (int i = 0; i < valueLength; i++) {
+            reversedValue += (value % 10) * Math.pow(10, valueLength - i - 1);
             value /= 10;
         }
         return reversedValue;
