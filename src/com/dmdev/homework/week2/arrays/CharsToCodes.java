@@ -1,4 +1,4 @@
-package com.dmdev.homework.week2;
+package com.dmdev.homework.week2.arrays;
 
 /*
 Дан одномерный массив символов.
