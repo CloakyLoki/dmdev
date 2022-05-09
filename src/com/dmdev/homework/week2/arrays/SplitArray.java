@@ -2,39 +2,19 @@ package com.dmdev.homework.week2.arrays;
 /*
 Дан одномерный массив целых чисел.
 
-Написать функцию, которая принимает этот массив и разбивает на 3 других: с только отрицательными числами, только положительными и только нули.
+Написать функцию, которая принимает этот массив и разбивает на 3 других: с только отрицательными числами, только положительными
+и только нули.
 Если для какого-то из массивов не будет значений, то должен быть создан пустой массив.
 Возвращает функция эти три массива в виде одного двумерного.
  */
 
 
 public class SplitArray {
+
     public static void main(String[] args) {
 
         int[] numbers = {-4, 1, 9, 0, -18, -5, -2, 3};
-        printArray(initializeResultArray(numbers, createResultArray(numbers)));
-    }
-
-    //Заполнение значениями итогового массива
-    private static int[][] initializeResultArray(int[] numbers, int[][] dividedArray) {
-
-        int iPositive = 0;
-        int iNegative = 0;
-        int iZeros = 0;
-
-        for (int number : numbers) {
-            if (number > 0) {
-                dividedArray[0][iPositive] = number;
-                iPositive++;
-            } else if (number < 0) {
-                dividedArray[1][iNegative] = number;
-                iNegative++;
-            } else {
-                dividedArray[2][iZeros] = number;
-                iZeros++;
-            }
-        }
-        return dividedArray;
+        printArray(fillResultArray(numbers));
     }
 
     //Создание итогового массива
@@ -57,6 +37,31 @@ public class SplitArray {
         resultArray[0] = new int[qPositive];
         resultArray[1] = new int[qNegative];
         resultArray[2] = new int[qZeros];
+
+        return resultArray;
+    }
+
+    //Заполнение значениями итогового массива
+    private static int[][] fillResultArray(int[] numbers) {
+
+        int[][] resultArray = createResultArray(numbers);
+
+        int iPositive = 0;
+        int iNegative = 0;
+        int iZeros = 0;
+
+        for (int number : numbers) {
+            if (number > 0) {
+                resultArray[0][iPositive] = number;
+                iPositive++;
+            } else if (number < 0) {
+                resultArray[1][iNegative] = number;
+                iNegative++;
+            } else {
+                resultArray[2][iZeros] = number;
+                iZeros++;
+            }
+        }
         return resultArray;
     }
 

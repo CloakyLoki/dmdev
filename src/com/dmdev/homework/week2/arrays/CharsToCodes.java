@@ -13,9 +13,11 @@ public class CharsToCodes {
     public static void main(String[] args) {
 
         char[] chars = {'a', '6', 'y', 'P', 'T', 'q', '9', '+'};
-    printUpperNumbers(charToCode(chars));
+        printGreaterArithmMean(charToCodeset(chars));
     }
-    private static int[] charToCode(char[] chars) {
+
+    private static int[] charToCodeset(char[] chars) {
+
         int[] codes = new int[chars.length];
         for (int i = 0; i < chars.length; i++) {
             codes[i] = chars[i];
@@ -23,22 +25,19 @@ public class CharsToCodes {
         return codes;
     }
 
-    private static void printUpperNumbers(int[] array) {
+    private static void printGreaterArithmMean(int[] values) {
+
         int mean = 0;
-        for (int number : array) {
+        for (int number : values) {
             mean += number;
         }
-        mean /= array.length;
+        mean /= values.length;
 
-        for (int number : array) {
-            if(number > mean){
-                System.out.print(number + " ");
+        for (int value : values) {
+            if (value > mean) {
+                System.out.print(value + " ");
             }
-
         }
-
     }
-
-
 }
 

@@ -1,29 +1,24 @@
 package com.dmdev.homework.week2.oop;
 
-public class Room implements Printable {
+public class Room extends Residence {
 
-    private boolean isPassage;
+    boolean isPassage;
 
-    Room(boolean isPassage) {
+    public Room(int number, boolean isPassage) {
+        super(number);
         this.isPassage = isPassage;
     }
 
     @Override
-    public void printOut() {
-        if (isPassage) {
-            System.out.println("Проходная комната");
+    public void print() {
+        if (isPassage()) {
+            System.out.println("         Комната проходная");
         } else {
-            System.out.println("Комната непроходная");
+            System.out.println("         Комната непроходная");
         }
     }
 
     public boolean isPassage() {
         return isPassage;
     }
-
-    public void setPassage(boolean passage) {
-        isPassage = passage;
-    }
-
-
 }

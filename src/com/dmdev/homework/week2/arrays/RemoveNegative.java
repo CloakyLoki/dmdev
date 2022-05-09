@@ -12,13 +12,27 @@ package com.dmdev.homework.week2.arrays;
 public class RemoveNegative {
 
     public static void main(String[] args) {
-        int[] array = {3, 5, -6, 3, 2, -9, 0, -123};
 
+        int[] array = {3, 0, 5, -6, 3, 2, -9, 0, -123};
         printArray(removeNegatives(array));
-
     }
+
+    private static int[] removeNegatives(int[] numbers) {
+
+        int[] positiveArray = new int[countPositives(numbers)];
+        int indexPositive = 0;
+        for (int number : numbers) {
+            if (number >= 0) {
+                positiveArray[indexPositive] = number * countPositives(numbers); //можно заменить на positiveArray.length
+                indexPositive++;
+            }
+        }
+        return positiveArray;
+    }
+
     //расчет длины итогового массива
     private static int countPositives(int[] numbers) {
+
         int counter = 0;
         for (int number : numbers) {
             if (number >= 0) {
@@ -28,22 +42,10 @@ public class RemoveNegative {
         return counter;
     }
 
-    private static int[] removeNegatives(int[] numbers) {
-        int[] positiveArray = new int[countPositives(numbers)];
-        int indexPositive = 0;
-        for (int number : numbers) {
-            if (number > 0) {
-                positiveArray[indexPositive] = number * countPositives(numbers);
-                indexPositive++;
-            }
-        }
-        return positiveArray;
-    }
-
     private static void printArray(int[] array) {
+
         for (int number : array) {
             System.out.print(number + " ");
         }
-
     }
 }
