@@ -22,7 +22,6 @@ public abstract class Residence implements Printable {
             printable.printAllInformation();
         }
     }
-
     public int getNumber() {
         return number;
     }

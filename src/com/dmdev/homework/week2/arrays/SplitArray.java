@@ -68,9 +68,11 @@ public class SplitArray {
     private static void printArray(int[][] array) {
 
         for (int[] line : array) {
+            System.out.print("[");
             for (int value : line) {
                 System.out.print(value + " ");
             }
+            System.out.print("]");
             System.out.println();
         }
     }

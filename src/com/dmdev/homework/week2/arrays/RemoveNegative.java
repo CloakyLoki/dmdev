@@ -1,6 +1,8 @@
 package com.dmdev.homework.week2.arrays;
 
 
+import java.util.Arrays;
+
 /*
 Дан одномерный массив целых чисел.
 Написать функцию, удаляющую из него все отрицательные элементы (удалить - значит создать новый массив с только положительными элементами).
@@ -14,7 +16,7 @@ public class RemoveNegative {
     public static void main(String[] args) {
 
         int[] array = {3, 0, 5, -6, 3, 2, -9, 0, -123};
-        printArray(removeNegatives(array));
+        System.out.println(Arrays.toString(removeNegatives(array)));
     }
 
     private static int[] removeNegatives(int[] numbers) {
@@ -40,12 +42,5 @@ public class RemoveNegative {
             }
         }
         return counter;
-    }
-
-    private static void printArray(int[] array) {
-
-        for (int number : array) {
-            System.out.print(number + " ");
-        }
     }
 }
