@@ -17,19 +17,20 @@ public class AccountFunds {
         int years = 3;
         int months = 2;
         int salary = 600;
-        double accountVanya = 0;
-        double accountBroker = 0;
-        double percentForBroker = 10;
-        double percentOnShares = 2;
+        double personalAccount = 0;
+        double brokerAccount = 0;
+        double percentForBroker = 0.1;
+        double percentOnShares = 0.02;
 
         for (int i = 1; i <= years * MONTHS_IN_YEAR + months; i++) {
             if (i % 6 == 0) {
                 salary += 400;
             }
-            accountBroker += (accountBroker + (salary * (percentForBroker / 100))) * (percentOnShares / 100); //скобки добавлены для лучшей читаемости
-            accountVanya += (salary - 300) - (salary * (percentForBroker / 100));
+            personalAccount += (salary - 300) - salary * percentForBroker;
+            brokerAccount += salary * percentForBroker;
+            brokerAccount += brokerAccount * percentOnShares;
         }
-        System.out.println("Собственный счет: $" + accountVanya);
-        System.out.println("Счет брокера: $" + accountBroker);
+        System.out.println("Собственный счет: $" + personalAccount);
+        System.out.println("Счет брокера: $" + brokerAccount);
     }
 }
