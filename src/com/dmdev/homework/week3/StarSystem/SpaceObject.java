@@ -14,14 +14,6 @@ public abstract class SpaceObject {
         this.distanceFromSun = distanceFromSun;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
     public double getDiameter() {
         return radius * 2;
     }
@@ -34,6 +26,14 @@ public abstract class SpaceObject {
         } else {
             System.out.println("Объект " + spaceObject.getName() + " равен " + getName());
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     public double getDistanceFromSun() {

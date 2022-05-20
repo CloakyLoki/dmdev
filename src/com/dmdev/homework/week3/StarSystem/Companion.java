@@ -1,18 +1,19 @@
 package com.dmdev.homework.week3.StarSystem;
 
-public abstract class Sputnik extends SpaceObject implements Satellite {
+public abstract class Companion extends SpaceObject implements Satellite {
 
     private final SpaceObject rotateAround;
     private final double orbit;
 
-    public Sputnik(String name, double weight, double radius, double distanceFromSun, SpaceObject rotateAround, double orbit) {
+    public Companion(String name, double weight, double radius,
+                     double distanceFromSun, SpaceObject rotateAround, double orbit) {
         super(name, weight, radius, distanceFromSun);
         this.rotateAround = rotateAround;
         this.orbit = orbit;
     }
 
     @Override
-    public SpaceObject getRotatingAround() {
+    public SpaceObject rotationPoint() {
         return rotateAround;
     }
 
