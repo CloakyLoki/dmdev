@@ -1,5 +1,3 @@
-package com.dmdev.homework.week3.Atm;
-
 /*
 Создать класс, описывающий банкомат.
 
@@ -11,67 +9,77 @@ package com.dmdev.homework.week3.Atm;
 При снятии денег метод должен распечатывать каким количеством купюр какого номинала выдаётся сумма.
 Создать конструктор с тремя параметрами - количеством купюр каждого номинала.
  */
-public class Atm {
-    private int note20;
-    private int note50;
-    private int note100;
 
-    public Atm(int note20, int note50, int note100) {
-        this.note20 = note20;
-        this.note50 = note50;
-        this.note100 = note100;
+package com.dmdev.homework.week3.Atm;
+
+public class Atm {
+    private int noteTwentyQuantity;
+    private int noteFiftyQuantity;
+    private int noteHundredQuantity;
+
+    public Atm(int noteTwentyQuantity, int noteFiftyQuantity, int noteHundredQuantity) {
+        this.noteTwentyQuantity = noteTwentyQuantity;
+        this.noteFiftyQuantity = noteFiftyQuantity;
+        this.noteHundredQuantity = noteHundredQuantity;
     }
 
     public boolean getCash(int moneyRequest) {
-        int note20Counter = 0;
-        int note50Counter = 0;
-        int note100Counter = 0;
-        int saveMoneyRequest = moneyRequest;
+        int noteTwentyCounter = 0;
+        int noteFiftyCounter = 0;
+        int noteHundredCounter = 0;
+        int moneyLeftToGive = moneyRequest; //сохранение изначального значения запрошенной суммы для последующего вывода в консоль
 
-        while (moneyRequest >= note20) {
-            if (moneyRequest >= 100 && note100 > 0) {
-                note100Counter += moneyRequest / 100;
-                moneyRequest %= 100;
-            }
-            if (moneyRequest >= 50 && note50 > 0) {
-                note50Counter += moneyRequest / 50;
-                moneyRequest %= 50;
-            }
-            if (moneyRequest >= 20 && note20 > 0) {
-                note20Counter += moneyRequest / 20;
-                moneyRequest %= 20;
-            } else {
-                System.out.println("Невозможно выдать сумму");
-                return false;
-            }
+        if (moneyRequest <= 0) {
+            System.out.println("Пожалуйста, введите корректную сумму для выдачи");
+            return false;
         }
-        printNoteRating(saveMoneyRequest, note20Counter, note50Counter, note100Counter);
+        if (moneyLeftToGive >= Note.HUNDRED.getRate() && noteHundredQuantity > 0) {
+            noteHundredCounter = countNote(moneyLeftToGive, Note.HUNDRED);
+            moneyLeftToGive %= Note.HUNDRED.getRate();
+        }
+        if (moneyLeftToGive >= Note.FIFTY.getRate() && noteFiftyQuantity > 0) {
+            noteFiftyCounter = countNote(moneyLeftToGive, Note.FIFTY);
+            moneyLeftToGive %= Note.FIFTY.getRate();
+        }
+        if (moneyLeftToGive >= Note.TWENTY.getRate() && noteTwentyQuantity > 0) {
+            noteTwentyCounter = countNote(moneyLeftToGive, Note.TWENTY);
+            moneyLeftToGive %= Note.TWENTY.getRate();
+        }
+        if (moneyLeftToGive != 0) {
+            System.out.println("Невозможно выдать сумму имеющимися банкнотами. Добавьте банкноты");
+            return false;
+        }
+        printNoteQuantities(moneyRequest, noteTwentyCounter, noteFiftyCounter, noteHundredCounter);
         return true;
     }
 
-    private void printNoteRating(int moneyRequest, int note20Counter, int note50Counter, int note100Counter) {
-        System.out.println("Запрошенная сумма " + moneyRequest + "$ выдана");
-        System.out.println("Количество купюр по номиналам:");
-        if (note20Counter != 0) {
-            System.out.println("20$:  " + note20Counter);
+    private int countNote(int moneyLeftToGive, Note note) {
+        return moneyLeftToGive / note.getRate();
+    }
+
+    private void printNoteQuantities(int moneyRequest, int noteTwentyCounter, int noteFiftyCounter, int noteHundredCounter) {
+        System.out.println("Запрошенная сумма " + moneyRequest + "$ выдана.");
+        System.out.println("Номиналы купюр:");
+        if (noteTwentyCounter != 0) {
+            System.out.println("20$:  " + noteTwentyCounter + " шт.");
         }
-        if (note50Counter != 0) {
-            System.out.println("50$:  " + note50Counter);
+        if (noteFiftyCounter != 0) {
+            System.out.println("50$:  " + noteFiftyCounter + " шт.");
         }
-        if (note100Counter != 0) {
-            System.out.println("100$: " + note100Counter);
+        if (noteHundredCounter != 0) {
+            System.out.println("100$: " + noteHundredCounter + " шт.");
         }
     }
 
-    public void setNote20(int note20) {
-        this.note20 = note20;
+    public void addNoteTwenty(int noteTwentyQuantity) {
+        this.noteTwentyQuantity += noteTwentyQuantity;
     }
 
-    public void setNote50(int note50) {
-        this.note50 = note50;
+    public void addNoteFifty(int noteFiftyQuantity) {
+        this.noteFiftyQuantity += noteFiftyQuantity;
     }
 
-    public void setNote100(int note100) {
-        this.note100 = note100;
+    public void addNoteHundred(int noteHundredQuantity) {
+        this.noteHundredQuantity += noteHundredQuantity;
     }
 }
