@@ -8,6 +8,7 @@ public final class SpaceUtils {
     }
 
     public static boolean isStar(SpaceObject spaceObject) {
+        //метод будет работать в рамках одной солнечной системы, когда звезда не вращается вокруг более крупного объекта
         return !(spaceObject instanceof Satellite);
     }
 
