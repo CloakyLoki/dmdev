@@ -1,3 +1,4 @@
+package com.dmdev.homework.week3.Atm;
 /*
 Создать класс, описывающий банкомат.
 
@@ -9,8 +10,6 @@
 При снятии денег метод должен распечатывать каким количеством купюр какого номинала выдаётся сумма.
 Создать конструктор с тремя параметрами - количеством купюр каждого номинала.
  */
-
-package com.dmdev.homework.week3.Atm;
 
 public class Atm {
     private int noteTwentyQuantity;

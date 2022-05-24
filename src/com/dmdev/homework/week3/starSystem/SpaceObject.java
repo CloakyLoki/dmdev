@@ -1,4 +1,4 @@
-package com.dmdev.homework.week3.StarSystem;
+package com.dmdev.homework.week3.starSystem;
 
 public abstract class SpaceObject {
 

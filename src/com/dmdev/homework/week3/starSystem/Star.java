@@ -1,8 +1,8 @@
-package com.dmdev.homework.week3.StarSystem;
+package com.dmdev.homework.week3.starSystem;
 
 public class Star extends SpaceObject {
 
-    double temperature;
+    private final double temperature;
 
     public Star(String name, double weight, double radius, double distanceFromSun, double temperature) {
         super(name, weight, radius, distanceFromSun);
