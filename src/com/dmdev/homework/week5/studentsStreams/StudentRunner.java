@@ -7,6 +7,9 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
+
 /**
  * Дан список студентов с полями:
  * - Имя
@@ -38,15 +41,30 @@ public class StudentRunner {
                 new Student("Коля", "Иванов", Year.SECOND, List.of(4, 5, 5, 5, 5, 5, 5)),
                 new Student("Женя", "Иванов", Year.SECOND, List.of(4, 3, 4, 5, 3, 4, 4, 4))
         );
-        System.out.println(getAverageGradeByYear(students));
-        System.out.println(getStudentBasicInfo(students));
+
+        System.out.println("1. Ключ - курс, значение: Средняя оценка студентов курса, количество оценок у которых больше 3-х");
+        for (Map.Entry<Year, Double> entry : getAverageGradeByYear(students).entrySet()) {
+            System.out.println("Курс: " + entry.getKey() + " " + entry.getValue());
+        }
+        System.out.println();
+        System.out.println("2. Ключ - курс, значение: Список студентов данного курса, но только с полями Имя и Фамилия.");
+        for (Map.Entry<Year, List<StudentBasic>> entry : getStudentBasicInfo(students).entrySet()) {
+            System.out.println("Курс: " + entry.getKey() + " " + entry.getValue());
+        }
+        System.out.println();
+        System.out.println("3. Ключ - курс, значение: Объект с двумя полями:\n" +
+                " * - Отсортированный список студентов с пункта 2\n" +
+                " * - Средняя оценка этих студентов");
+        for (Map.Entry<Year, Statistic> entry : getStudentBasicAverage(students).entrySet()) {
+            System.out.println("Курс: " + entry.getKey() + " " + entry.getValue());
+        }
     }
 
     public static Map<Year, Double> getAverageGradeByYear(List<Student> students) {
         return students.stream()
                 .filter(student -> student.getGrades().size() > MIN_VALUABLE_GRADELIST)
                 .collect(
-                        Collectors.groupingBy(Student::getYear, //сгруппировать по курсу
+                        groupingBy(Student::getYear, //сгруппировать по курсу
                                 TreeMap::new,
                                 Collectors.mapping(Student::getGrades, //переход к списку оценок
                                         Collectors.flatMapping(Collection::stream, //переход к оценкам
@@ -56,14 +74,31 @@ public class StudentRunner {
     public static Map<Year, List<StudentBasic>> getStudentBasicInfo(List<Student> students) {
         return students.stream()
                 .sorted(Comparator.comparing(Student::getName).thenComparing(Student::getSurname)) //сортировка по имени и фамилии
-                .collect(Collectors.groupingBy(Student::getYear, //группировка по курсу
+                .collect(groupingBy(Student::getYear, //группировка по курсу
                         TreeMap::new,
                         Collectors.mapping(student -> new StudentBasic(student.getName(), student.getSurname()), //создание новых объектов
-                                Collectors.toList()))); //формирование из них списка
+                                toList()))); //формирование из них списка
     }
-/*
-    Для третьего задания идеи были такие:
-    1. Использовать наработки первых двух заданий
-    2. Создать новый объект и в его конструктор передать два потока - для формирования списка и для вычисления средней оценки.
-}*/
+
+    public static Map<Year, Statistic> getStudentBasicAverage(List<Student> students) {
+        return students.stream()
+                .collect(Collectors.collectingAndThen(
+                        groupingBy(Student::getYear, toList()),
+                        resultMap -> {
+                            Map<Year, Statistic> statMap = new TreeMap<>(); //result
+                            resultMap.forEach((year, studentList) -> {
+                                List<StudentBasic> studentsBasic = studentList.stream()
+                                        .map(student -> new StudentBasic(student.getName(), student.getSurname()))
+                                        .collect(toList());
+                                double averageGrade = studentList.stream()
+                                        .flatMap(student -> student.getGrades().stream())
+                                        .mapToDouble(grade -> grade)
+                                        .average()
+                                        .orElse(0);
+                                Statistic statistic = new Statistic(studentsBasic, averageGrade);
+                                statMap.put(year, statistic);
+                            });
+                            return statMap;
+                        }));
+    }
 }

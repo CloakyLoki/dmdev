@@ -23,4 +23,12 @@ public class Statistic {
     public double getAverageGrade() {
         return averageGrade;
     }
+
+    @Override
+    public String toString() {
+        return "Statistic{" +
+                "studentsBasic=" + studentsBasic +
+                ", averageGrade=" + averageGrade +
+                '}';
+    }
 }
