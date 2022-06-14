@@ -1,7 +1,5 @@
 package com.dmdev.homework.week4.combineChatList;
 
-import com.dmdev.homework.week4.chatsBelowThousandUsers.ChatUtil;
-
 import java.util.*;
 
 import static com.dmdev.homework.week4.combineChatList.ChatCombinerUtil.*;
@@ -48,6 +46,6 @@ public class ChatCombinerRunner {
 
         List<Chat> chatList = Arrays.asList(boysChat, girlsChat, commonChat);
         printUserList(extractAdultUsers(chatList));
-        System.out.println("Средний возраст совершеннолетних участников составляет " + calculateMiddleAge(extractAdultUsers(chatList)) + " лет.");
+        System.out.println("Средний возраст совершеннолетних участников составляет " + calculateAverageAge(extractAdultUsers(chatList)) + " лет.");
     }
 }
