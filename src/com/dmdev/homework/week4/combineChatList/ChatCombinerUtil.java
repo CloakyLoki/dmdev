@@ -11,6 +11,7 @@ import java.util.*;
 
 public final class ChatCombinerUtil {
 
+    private final static int ADULT_AGE = 18;
     private ChatCombinerUtil() {
     }
 
@@ -19,7 +20,7 @@ public final class ChatCombinerUtil {
 
         for (Chat chat : chatList) {
             for (User user : chat.getUserlist()) {
-                if (user.getAge() > 18) {
+                if (user.getAge() > ADULT_AGE) {
                     adultUserList.put(user.getId(), user);
                 }
             }
@@ -27,7 +28,7 @@ public final class ChatCombinerUtil {
         return new ArrayList<>(adultUserList.values());
     }
 
-    public static int calculateMiddleAge(List<User> userList) {
+    public static int calculateAverageAge(List<User> userList) {
         int sum = 0;
         Iterator<User> itr = userList.listIterator();
         while (itr.hasNext()){
